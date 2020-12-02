@@ -7,7 +7,7 @@ revision = (
     subprocess.run(['git', 'rev-parse','HEAD','--short=10'], capture_output=True, text=True).stdout
 )
 gitDescribeOutput = (
-    subprocess.run(['git', 'describe','--tags','--abbrev=10'], capture_output=True, text=True).stdout
+    subprocess.run(['git', 'describe','--tags'], capture_output=True, text=True).stdout
 )
 info = gitDescribeOutput.split('-')
 
@@ -20,6 +20,6 @@ env.Append(CPPDEFINES=[
   ("GIT_REV", "\"%s\""%revision.strip()),
   ("GIT_REV_NO", "0x%s"%revision),
   ("MEEZANI_VERSION", projectTag),
-  ("AHEAD_COMMITS", info[1])
+#   ("AHEAD_COMMITS", info[1]),
 ])
 

@@ -10,6 +10,7 @@ gitDescribeOutput = (
     subprocess.run(['git', 'describe','--tags'], capture_output=True, text=True).stdout
 )
 info = gitDescribeOutput.split('-')
+projectTagNumber = projectTag.replace('.','0')
 
 
 Import("env")
@@ -18,8 +19,8 @@ print(env)
 
 env.Append(CPPDEFINES=[
   ("GIT_REV", "\"%s\""%revision.strip()),
-  ("GIT_REV_NO", "0x%s"%revision),
-  ("MEEZANI_VERSION", projectTag),
-#   ("AHEAD_COMMITS", info[1]),
+  ("MEEZANI_VERSION", "\"%s\"" % projectTag),
+  ("MEEZANI_VERSION_NO", projectTagNumber),
+  ("AHEAD_COMMITS", info[1])
 ])
 
